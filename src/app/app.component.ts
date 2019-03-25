@@ -8,8 +8,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class AppComponent implements OnInit {
   items;
+  item;
   constructor(private db: AngularFirestore) {
-
+    this.item = {
+      age: '',
+      firstName: ''
+    };
   }
   ngOnInit(): void {
     this.db.collection('Students').valueChanges().subscribe(item => {
@@ -21,7 +25,7 @@ export class AppComponent implements OnInit {
 
   add() {
     debugger;
-    this.db.collection("Students").add().catch((error) => {
+    this.db.collection("Students").add(this.item).catch((error) => {
       alert(error);
     });
   }
